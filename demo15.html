@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+		<form method="post" id="form">		
+		<input type="text" name="name">
+		<input type="button" value="提交" id="btn">
+	</form>
+	<script type="text/javascript" src="jquery-3.3.1.js"></script>
+<script type="text/javascript">
+	$('#btn').click(function(){
+		var mydata = $('#form').serialize()
+		$.ajax({url:'demo15.php',type:'post',data:mydata,contentType:'application/json',succsess:function(data){console.log(data)}})
+	})
+	
+</script>
+</body>
+</html>

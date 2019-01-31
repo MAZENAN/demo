@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table的td自动换行</title>
+    <link rel="stylesheet" href="normalize.css">
+    <style type="text/css">
+        .table{margin: 20px;}
+        .table_box{width:100%;font-size:12px;}
+        .table_box td{border:1px solid #96e323;border-right:none;border-top:none;display:inline-block;padding:0;width: 80px;}
+        .table_box td:last-child{border-right:1px solid #19e33a !important;}
+        .my_title{border-bottom:1px solid #e39d7a;display:flex;align-items:center;line-height:16px;padding:5px;}
+        .my_content{padding: 5px;}
+    </style>
+</head>
+<body>
+    <div class="table">
+        <table class="table_box">
+            <tr>
+                <td>
+                    
+                    <div class="my_content">this is the content2,this is the content2,this is the content2,this is the content2</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">this is the content2,this is the content2,this is the content2,this is the content2</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第2期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">this is the content2</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第2期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">this is the content2</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                   
+                    <div class="my_content">第2期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">this is the content2</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+                <td>
+                    
+                    <div class="my_content">第一期</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script>
+        function tabFun(){
+            var tabW = $(".table").width(); // 表格的宽度
+            var tdW = $(".table_box td").width(); // 一个内容的宽度
+            var bor = parseInt(tabW/tdW); // 一行有多少个td
+            var cha = tabW - tdW*bor; // 差值
+            if (cha <= bor) { // 去掉一个边框的宽度
+                bor--;
+            }
+            // 清空边框
+            $(".table_box td").css({"border-right":"none","border-top":"none"});
+            // 设置相应的边框
+            $(".table_box td:nth-child("+bor+"n)").css({"border-right":"1px solid #000"});
+            $(".table_box td").slice(0,bor).css({"border-top":"1px solid #000"});
+
+            // 所有.my_title的高度集合
+            var titH = [];
+            // 所有.my_content的高度集合
+            var conH = [];
+            $(".my_content").each(function(index, el) {
+                // 把高度数据存放到conH数组里面
+                conH.push($(this).height());
+            });
+            $(".my_title").each(function(index, el) {
+                // 把高度数据存放到conH数组里面
+                titH.push($(this).height());
+            });
+            // 获取最大高度并把其它my_content高度设为最大高度
+            $(".my_content").height(Math.max.apply(null, conH));
+            // 获取最大高度并把其它my_title高度设为最大高度
+            $(".my_title").height(Math.max.apply(null, titH));
+        }
+        tabFun();
+
+        $(window).resize(function(event) {
+            tabFun();
+        });
+    </script>
+</body>
+</html>

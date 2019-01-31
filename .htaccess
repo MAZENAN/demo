@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^http://localhost [NC]        
+RewriteCond %{HTTP_REFERER} !^$	
+RewriteRule .+\.html referer.html
